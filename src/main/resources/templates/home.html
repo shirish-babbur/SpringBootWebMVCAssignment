@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring boot Web mvc Application</title>
+    <style>
+            table, th, td {
+               border: 1px solid black;
+               border-spacing: 0px;
+            }
+            th, td {
+                padding: 10px;
+            }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>firstname</th>
+        <th>lastname</th>
+        <th>email</th>
+        <th>age</th>
+        <th>Salary</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${model}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.salary}"></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<h2>Add User</h2>
+<form action="/Users/addUser" method="POST">
+    firstName <input type="text" id="firstName" name="firstName"/><br/>
+    lastName <input type="text" id="lastName" name="lastName"/><br/>
+    email <input type="text" id="email" name="email"/><br/>
+    age <input type="number" id="age" name="age"/><br/>
+    salary <input type="number" id="salary" name="salary"/><br/>
+    <input type="submit"/>
+</form>
+<h2>Search for Users</h2>
+
+<form th:action="@{/Users/{userId}}" method="GET">
+    <input type="number" name="userId" id="search" th:value="${userId}"/>
+    <input type="submit" value="Search"/>
+</form>
+</body>
+</html>
